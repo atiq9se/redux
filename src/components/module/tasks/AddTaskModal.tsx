@@ -21,6 +21,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { addTask } from "@/redux/features/task/taskSlice";
+import { useAppDispatch } from "@/redux/hook";
 import { formatDate } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form"
@@ -32,9 +34,11 @@ import { useForm } from "react-hook-form"
 export function AddTaskModal() {
  
     const form = useForm();
+    const dispatch = useAppDispatch();
 
     const onSubmit = (data)=>{
         console.log(data)
+        dispatch(addTask(data))
     }
 
   return (
@@ -53,7 +57,7 @@ export function AddTaskModal() {
                 control={form.control}
                 name="title"
                 render={({field}) => (
-                <FormItem>
+                <FormItem className="mt-5">
                     <FormLabel>Title</FormLabel>
                     <FormControl>
                         <Input {...field} value={field.value || ""} />
@@ -63,9 +67,9 @@ export function AddTaskModal() {
                 />
                 <FormField
                 control={form.control}
-                name="title"
+                name="description"
                 render={({field}) => (
-                <FormItem>
+                <FormItem className="mt-5">
                     <FormLabel>Description</FormLabel>
                     <FormControl>
                         <Textarea {...field} value={field.value || ""} />
@@ -77,15 +81,15 @@ export function AddTaskModal() {
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                      <FormItem>
+                      <FormItem className="mt-5">
                         <FormLabel>Email</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger>
-                              <SelectValue placeholder="Select a Priority" />
+                              <SelectValue placeholder="Select verify a Priority display" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent>
+                          <SelectContent className="w-100">
                             <SelectItem value="low">Low</SelectItem>
                             <SelectItem value="medium">Medium</SelectItem>
                             <SelectItem value="high">High</SelectItem>
@@ -99,24 +103,24 @@ export function AddTaskModal() {
 
                   <FormField
                     control={form.control}
-                    name="dob"
+                    name="duedate"
                     render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                        <FormLabel>Date of birth</FormLabel>
+                      <FormItem className="flex flex-col mt-5">
+                        <FormLabel>Due Date</FormLabel>
                         <Popover>
                           <PopoverTrigger asChild>
                             <FormControl>
                               <Button
                                 variant={"outline"}
                                 className={cn(
-                                  "w-[240px] pl-3 text-left font-normal",
+                                  "pl-3 text-left font-normal",
                                   !field.value && "text-muted-foreground"
                                 )}
                               >
                                 {field.value ? (
                                   formatDate(field.value, "PPP")
                                 ) : (
-                                  <span>Pick a date</span>
+                                  <span>Due Date</span>
                                 )}
                                 <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                               </Button>
@@ -127,23 +131,20 @@ export function AddTaskModal() {
                               mode="single"
                               selected={field.value}
                               onSelect={field.onChange}
-                              disabled={(date) =>
-                                date > new Date() || date < new Date("1900-01-01")
-                              }
+                              // disabled={(date) =>
+                              //   date > new Date() || date < new Date("1900-01-01")
+                              // }
                               captionLayout="dropdown"
                             />
                           </PopoverContent>
                         </Popover>
-                        <FormDescription>
-                          Your date of birth is used to calculate your age.
-                        </FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
                  
                 <DialogFooter>
-                    <Button type="submit">Save changes</Button>
+                    <Button type="submit" className="mt-5">Save changes</Button>
                 </DialogFooter>
             </form>
           </Form>
