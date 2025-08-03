@@ -1,14 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
+import { toggleCompleteState } from "@/redux/features/task/taskSlice";
 import type { ITask } from "@/types";
 import { Trash2 } from "lucide-react";
+import { useDispatch } from "react-redux";
 
 interface IProps{
     task: ITask;
 }
 
 export default function TaskCard({task}:IProps) {
+    const dispatch = useDispatch();
     return (
         <div className="border px-5 py-3 rounded-md">
             <div className="flex justify-between items-center">
@@ -22,7 +25,7 @@ export default function TaskCard({task}:IProps) {
                 </div>
                 <div className="flex gap-3 items-center">
                     <Button variant="link"  className="p-0 text-red-500"><Trash2></Trash2></Button>
-                   <Checkbox></Checkbox>
+                   <Checkbox onClick={()=>dispatch(toggleCompleteState(task.id))}></Checkbox>
 
                 </div>
 

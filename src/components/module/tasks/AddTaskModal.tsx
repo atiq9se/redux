@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dialog"
 import { Form, 
     FormControl,  
-    FormDescription,  
     FormField, 
     FormItem, 
     FormLabel, 
@@ -28,15 +27,9 @@ import { formatDate } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form"
 
-
-
-
-
 export function AddTaskModal() {
- 
     const form = useForm();
     const dispatch = useAppDispatch();
-
     const onSubmit:SubmitHandler<FieldValues> = (data)=>{
         dispatch(addTask(data as ITask));
     }
@@ -103,7 +96,7 @@ export function AddTaskModal() {
 
                   <FormField
                     control={form.control}
-                    name="duedate"
+                    name="dueDate"
                     render={({ field }) => (
                       <FormItem className="flex flex-col mt-5">
                         <FormLabel>Due Date</FormLabel>
