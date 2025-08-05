@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link } from 'react-router';
 import { ModeToggle } from '../mode-toggler';
 
@@ -8,7 +8,7 @@ const Navbar = () => {
             <div className='flex items-center'>
                 Logo
             </div>
-            <div>
+            <div className='flex gap-5'>
                 <Link to="/">Tasks</Link>
                 <Link to="/users">Users</Link>
             </div>

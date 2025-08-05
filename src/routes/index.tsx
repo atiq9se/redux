@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import App from "../App.tsx";
-import User from "../pages/User.tsx";
+import User from "../pages/Users.tsx";
 import Tasks from "../pages/Tasks.tsx";
 
 const router = createBrowserRouter([
