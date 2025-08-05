@@ -21,7 +21,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { addTask } from "@/redux/features/task/taskSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { selectUsers } from "@/redux/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import type { ITask } from "@/types";
 import { formatDate } from "date-fns";
 import { CalendarIcon } from "lucide-react";
@@ -30,6 +31,8 @@ import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form"
 export function AddTaskModal() {
     const form = useForm();
     const dispatch = useAppDispatch();
+    const users = useAppSelector(selectUsers);
+
     const onSubmit:SubmitHandler<FieldValues> = (data)=>{
         dispatch(addTask(data as ITask));
     }
@@ -86,6 +89,30 @@ export function AddTaskModal() {
                             <SelectItem value="low">Low</SelectItem>
                             <SelectItem value="medium">Medium</SelectItem>
                             <SelectItem value="high">High</SelectItem>
+                          </SelectContent>
+                        </Select>
+                     
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="assignedTo"
+                    render={({ field }) => (
+                      <FormItem className="mt-5">
+                        <FormLabel>Assigned to</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a user" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="w-100">
+                            {
+                              users.map(user=><SelectItem value={user.id}>{user.name}</SelectItem> )
+                            }
                           </SelectContent>
                         </Select>
                      

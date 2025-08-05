@@ -15,17 +15,16 @@ import { Form,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input";
 
-
-import { addTask } from "@/redux/features/task/taskSlice";
+import { addUser } from "@/redux/features/user/userSlice";
 import { useAppDispatch } from "@/redux/hook";
-import type { ITask } from "@/types";
+import type { IUser } from "@/types";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form"
 
 export function AddUserModal() {
     const form = useForm();
     const dispatch = useAppDispatch();
     const onSubmit:SubmitHandler<FieldValues> = (data)=>{
-        dispatch(addTask(data as ITask));
+        dispatch(addUser(data as IUser));
     }
 
   return (
