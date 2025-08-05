@@ -37,7 +37,6 @@ const taskSlice = createSlice({
     reducers: {
         addTask: (state, action: PayloadAction<DraftTask> )=>{
             const taskData = createTask(action.payload)
-
             state.tasks.push(taskData)
         },
 

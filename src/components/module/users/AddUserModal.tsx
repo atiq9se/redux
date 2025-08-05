@@ -21,7 +21,7 @@ import { useAppDispatch } from "@/redux/hook";
 import type { ITask } from "@/types";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form"
 
-export function AddTaskModal() {
+export function AddUserModal() {
     const form = useForm();
     const dispatch = useAppDispatch();
     const onSubmit:SubmitHandler<FieldValues> = (data)=>{
