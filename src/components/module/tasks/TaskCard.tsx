@@ -31,9 +31,7 @@ export default function TaskCard({task}:IProps) {
                 <div className="flex gap-3 items-center">
                    <Button variant="link"  className="p-0 text-red-500" onClick={()=>dispatch(deleteTask(task.id))}><Trash2></Trash2></Button>
                    <Checkbox checked={task.isCompleted} onClick={()=>dispatch(toggleCompleteState(task.id))}></Checkbox>
-
                 </div>
-
             </div>
             <p className="mt-5">{assignedUser ? assignedUser.name : "No ONE"}</p>
             <p className="mt-5">{task.description}</p>
